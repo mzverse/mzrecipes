@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "mzrecipes",
+  "version": "${version}",
+  "name": "MzRecipes",
+  "authors": [
+    "mz"
+  ],
+  "contact": {
+    "homepage": "https://github.com/BugCleanser/MzRecipes",
+    "sources": "https://github.com/BugCleanser/MzRecipes"
+  },
+  "license": "MPL-2.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "mz.mzrecipes.entrypoint.MzRecipesFabric"
+    ]
+  },
+  "depends": {
+    "mzlib": ">=10.0.1"
+  }
+}

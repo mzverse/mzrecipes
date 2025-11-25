@@ -1,0 +1,7 @@
+name: MzRecipes
+version: ${version}
+authors:
+  - "mz"
+main: mz.mzrecipes.entrypoint.MzRecipesBukkit
+depend: [ MzLib ]
+api-version: 1.13
