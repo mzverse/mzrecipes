@@ -9,6 +9,7 @@ public class MzRecipesBukkit extends JavaPlugin
     @Override
     public void onEnable()
     {
+        MzRecipes.instance.jar = this.getFile();
         MzLib.instance.register(MzRecipes.instance);
     }
 

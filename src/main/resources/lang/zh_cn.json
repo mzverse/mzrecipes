@@ -1,0 +1,4 @@
+{
+  "mzrecipes.type.vanilla_shaped": "原生有序配方",
+  "mzrecipes.recipe.lore": "§eid: §7${id}\n§b来源: ${{'native': '§a原生', 'custom': '§1自定义'}[source]}\n§d状态: ${loaded?'§a已加载':'§c未加载'}\n§6设定: ${enabled?'§a启用':'§c禁用'}"
+}

@@ -5,6 +5,7 @@ import mz.mzlib.minecraft.vanilla.ServerModule;
 import mz.mzlib.module.MzModule;
 import mz.mzrecipes.MzRecipes;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class MzRecipesFabric extends MzModule implements ModInitializer
 {
@@ -17,6 +18,8 @@ public class MzRecipesFabric extends MzModule implements ModInitializer
     @Override
     public void onInitialize()
     {
+        MzRecipes.instance.jar = FabricLoader.getInstance().getModContainer(MzRecipes.instance.MOD_ID)
+            .orElseThrow(AssertionError::new).getOrigin().getPaths().get(0).toFile();
         MzLibMinecraftInitializer.instance.future.thenRun(this::load);
     }
 

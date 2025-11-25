@@ -4,4 +4,5 @@ authors:
   - "mz"
 main: mz.mzrecipes.entrypoint.MzRecipesBukkit
 depend: [ MzLib ]
+load: STARTUP
 api-version: 1.13
