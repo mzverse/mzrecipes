@@ -1,0 +1,65 @@
+name: Build with Gradle
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    permissions:
+      contents: write
+      discussions: write
+      packages: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+
+      - name: Make gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Package with Gradle
+        run: ./gradlew build sourcesJar
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: out/*.jar
+          retention-days: 90
+
+  release:
+    needs: build
+    permissions:
+      contents: write
+      discussions: write
+    runs-on: ubuntu-latest
+    if: |
+      startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: out/
+      - name: Prerelease
+        uses: softprops/action-gh-release@v2
+        if: |
+          contains(github.ref_name, '-alpha') || contains(github.ref_name, '-beta')
+        with:
+          prerelease: true
+          files: out/*.jar
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: |
+          !contains(github.ref_name, '-alpha') && !contains(github.ref_name, '-beta')
+        with:
+          prerelease: false
+          files: out/*.jar

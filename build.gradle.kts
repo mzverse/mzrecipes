@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "mz"
-version = "0.1"
+version = "1.0-alpha.1"
 
 val outputDir = File(rootProject.projectDir, "out")
 
