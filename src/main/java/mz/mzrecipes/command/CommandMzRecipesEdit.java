@@ -23,7 +23,7 @@ public class CommandMzRecipesEdit extends MzModule
             {
                 if(!context.successful || !context.doExecute)
                     return;
-                UiStack.get(context.getSource().getPlayer().unwrap()).go(FactoryUiRecipes.createTypes());
+                UiStack.get(context.getSource().getPlayer().unwrap()).go(FactoryUiRecipes.createEditorKinds());
             })
         ));
     }
