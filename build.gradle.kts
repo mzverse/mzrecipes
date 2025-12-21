@@ -12,6 +12,7 @@ val outputDir = File(rootProject.projectDir, "out")
 
 repositories {
     mavenCentral()
+    mavenLocal()
     gradlePluginPortal()
     var actionGithub: MavenArtifactRepository.() -> Unit = {
         credentials {
