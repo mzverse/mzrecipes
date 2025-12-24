@@ -3,14 +3,15 @@ package mz.mzrecipes.kind;
 import mz.mzlib.minecraft.Identifier;
 import mz.mzlib.module.IRegistrar;
 import mz.mzlib.module.MzModule;
+import mz.mzlib.util.Instance;
 import mz.mzlib.util.RuntimeUtil;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class RegistrarKindRecipeManager implements IRegistrar<KindRecipeManager<?, ?>>
+public class RegistrarKindRecipeManager implements IRegistrar<KindRecipeManager<?, ?>>, Instance
 {
-    public static RegistrarKindRecipeManager instance = new RegistrarKindRecipeManager();
+    public static final RegistrarKindRecipeManager instance = RuntimeUtil.nul();
 
     public Map<Identifier, KindRecipeManager<?, ?>> registered = new LinkedHashMap<>();
 

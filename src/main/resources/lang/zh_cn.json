@@ -1,4 +1,6 @@
 {
   "mzrecipes.type.vanilla_shaped": "原生有序配方",
-  "mzrecipes.recipe.lore": "§eid: §7${id}\n§b来源: ${{'NATIVE': '§a原生', 'CUSTOM': '§1自定义'}[source]}\n§d状态: ${enabled?'§a启用':'§c禁用'}"
+  "mzrecipes.recipe.lore": "§eid: §7${id}\n§b来源: ${{'NATIVE': '§a原生', 'CUSTOM': '§1自定义'}[source]}\n§d状态: ${enabled?'§a启用':'§c禁用'}",
+  "mzrecipes.item.ingredient_id": "§e匹配ID: §7${id}",
+  "mzrecipes.item.ingredient_category": "§e匹配类别: §7${idV_1300}${tagV1300.equals(idV_1300)?'':`(${tagV1300})`}"
 }

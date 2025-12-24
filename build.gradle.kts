@@ -1,7 +1,5 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
-    id("java")
+    id("java-library")
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
@@ -48,12 +46,6 @@ dependencies {
 }
 
 tasks {
-    jar {
-        archiveClassifier.set("original")
-    }
-    shadowJar {
-        archiveClassifier.set("")
-    }
     register<Copy>("copyBinaryResources") {
         from("src/main/resources") {
             include("**/*.js")
@@ -74,15 +66,12 @@ tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
     }
-    register<Copy>("moveJarToOutputDir") {
-        val shadowJarTask = project.tasks.findByPath("shadowJar") as ShadowJar
-        from(shadowJarTask.outputs.files)
-        into(outputDir)
+    shadowJar {
+        destinationDirectory = outputDir
     }
 
     build {
         dependsOn(shadowJar)
-        dependsOn("moveJarToOutputDir")
     }
 }
 

@@ -7,6 +7,7 @@ import mz.mzlib.minecraft.recipe.IngredientVanilla;
 import mz.mzlib.minecraft.recipe.Recipe;
 import mz.mzlib.util.Option;
 import mz.mzrecipes.MzRecipes;
+import mz.mzrecipes.item.RegistrarMzItemIngredient;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class CustomRecipe<R extends Recipe>
     }
     public CustomRecipe(List<ItemStack> ingredients)
     {
-        this(Identifier.newInstance(MzRecipes.instance.MOD_ID, UUID.randomUUID().toString()), ingredients);
+        this(Identifier.of(MzRecipes.instance.MOD_ID, UUID.randomUUID().toString()), ingredients);
     }
 
     public Identifier getId()
@@ -44,8 +45,7 @@ public class CustomRecipe<R extends Recipe>
     public List<Option<Ingredient>> compileIngredients()
     {
         return this.getIngredients().stream()
-            .map(is -> Option.some(is).filter(it -> !it.isEmpty()).map(IngredientVanilla::of)
-                .map(it -> it.withCount(is.getCount())))
-            .collect(Collectors.toList()); // TODO
+            .map(RegistrarMzItemIngredient.instance::compile)
+            .collect(Collectors.toList());
     }
 }

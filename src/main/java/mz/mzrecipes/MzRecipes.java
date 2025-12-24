@@ -4,6 +4,9 @@ import mz.mzlib.i18n.I18n;
 import mz.mzlib.module.MzModule;
 import mz.mzlib.util.RuntimeUtil;
 import mz.mzrecipes.command.CommandMzRecipes;
+import mz.mzrecipes.item.MzItemIngredientCategory;
+import mz.mzrecipes.item.MzItemIngredientId;
+import mz.mzrecipes.item.RegistrarMzItemIngredient;
 import mz.mzrecipes.kind.KindRecipeManagerShaped;
 import mz.mzrecipes.kind.RegistrarKindRecipeManager;
 
@@ -32,8 +35,14 @@ public class MzRecipes extends MzModule
 
         this.register(CommandMzRecipes.instance);
 
-        this.register(RegistrarKindRecipeManager.instance);
+        this.register(new RegistrarKindRecipeManager());
 
-        this.register(KindRecipeManagerShaped.instance);
+        this.register(new KindRecipeManagerShaped());
+
+        this.register(MzItemIngredientId.class);
+        this.register(MzItemIngredientCategory.class);
+        this.register(new RegistrarMzItemIngredient());
+        this.register(MzItemIngredientCategory.of("wool"));
+        this.register(MzItemIngredientCategory.of("planks"));
     }
 }

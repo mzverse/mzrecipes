@@ -11,10 +11,8 @@ import mz.mzlib.minecraft.ui.window.UiWindowRect;
 import mz.mzlib.minecraft.ui.window.UiWindowUtil;
 import mz.mzlib.minecraft.ui.window.control.UiWindowControl;
 import mz.mzlib.minecraft.ui.window.control.UiWindowControlReadOnly;
-import mz.mzlib.util.Either;
-import mz.mzlib.util.Instance;
-import mz.mzlib.util.Option;
-import mz.mzlib.util.ThrowableSupplier;
+import mz.mzlib.util.*;
+import mz.mzrecipes.item.RegistrarMzItemIngredient;
 import mz.mzrecipes.recipe.CustomRecipeCraftingShaped;
 
 import java.awt.*;
@@ -24,7 +22,7 @@ import java.util.stream.Collectors;
 
 public class KindRecipeManagerShaped extends KindRecipeManager<RecipeCraftingShaped, CustomRecipeCraftingShaped> implements Instance
 {
-    public static KindRecipeManagerShaped instance = new KindRecipeManagerShaped();
+    public static final KindRecipeManagerShaped instance = RuntimeUtil.nul();
 
     public Map<Identifier, CustomRecipeCraftingShaped> customRecipes = new HashMap<>();
 
@@ -131,9 +129,7 @@ public class KindRecipeManagerShaped extends KindRecipeManager<RecipeCraftingSha
                         {
                             for(IngredientVanilla ingredient : r.getIngredients().get(x + y * r.getWidth()))
                             {
-                                inventory.setItemStack(this.getIndex(new Point(x, y)), ingredient.getMatchingStacks().stream().findFirst().orElseGet(
-                                    () -> ItemStack.builder().fromId("minecraft:stone")
-                                        .customName(Text.literal("no matching items")).build()));
+                                inventory.setItemStack(this.getIndex(new Point(x, y)), RegistrarMzItemIngredient.instance.decompile(ingredient));
                             }
                         }
                         for(CustomRecipeCraftingShaped r : recipe.getSecond()) // custom
